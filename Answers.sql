@@ -1,13 +1,12 @@
 create database book_store;
-
+-- creates table called book
 CREATE TABLE book (
     bookId INT PRIMARY KEY AUTO_INCREMENT, 
     bookTitle VARCHAR(50), 
-    ISBN VARCHAR(50), 
     genre VARCHAR(50), 
     publicationYear YEAR
 );
-
+-- creates table called author
 CREATE TABLE author (
     authorId INT PRIMARY KEY AUTO_INCREMENT, 
     authorName VARCHAR(50), 
@@ -22,18 +21,18 @@ CREATE TABLE bookAuthor (
     FOREIGN KEY (bookId) REFERENCES book(bookId) ON DELETE CASCADE, 
     FOREIGN KEY (authorId) REFERENCES author(authorId) ON DELETE CASCADE
 );
-
+-- creates table called bookLanguage
 CREATE TABLE bookLanguage (
     bookLanguageId INT PRIMARY KEY AUTO_INCREMENT, 
     languageName VARCHAR(50)
 );
-
+-- creates table called publisher
 CREATE TABLE publisher (
     publisherId INT PRIMARY KEY AUTO_INCREMENT, 
     name VARCHAR(50), 
     contactDetail VARCHAR(50)
 );
--- Create shipping_method table
+-- creates table called shipping_method
 CREATE TABLE shipping_method (
     shipping_method_id INT PRIMARY KEY AUTO_INCREMENT,
     method_name VARCHAR(100) NOT NULL,
@@ -86,23 +85,19 @@ CREATE USER 'db_admin'@'localhost' IDENTIFIED BY 'Admin@123';
 GRANT ALL PRIVILEGES ON *.* TO 'db_admin'@'localhost' WITH GRANT OPTION;
 
 -- Create application user with read/write access
-CREATE USER 'app_user'@'localhost' IDENTIFIED BY 'App@123';
-GRANT SELECT, INSERT, UPDATE, DELETE ON book_store.* TO 'app_user'@'localhost';
+CREATE USER 'annan_sarpei'@'localhost' IDENTIFIED BY 'annan123';
+GRANT SELECT, INSERT, UPDATE, DELETE ON book_store.* TO 'annan_sarpei'@'localhost';
 
 -- Create reporting user with read-only access
-CREATE USER 'report_user'@'localhost' IDENTIFIED BY 'Report@123';
-GRANT SELECT ON book_store.* TO 'report_user'@'localhost';
-
--- Create backup user
-CREATE USER 'backup_user'@'localhost' IDENTIFIED BY 'Backup@123';
-GRANT SELECT, LOCK TABLES ON book_store.* TO 'backup_user'@'localhost';
+CREATE USER 'rose_wanjiru'@'localhost' IDENTIFIED BY 'Rose@123';
+GRANT SELECT ON book_store.* TO 'rose_wanjiru'@'localhost';
 
 -- Create customer service user with limited access
-CREATE USER 'cs_user'@'localhost' IDENTIFIED BY 'CS@123';
-GRANT SELECT, UPDATE ON book_store.customer TO 'cs_user'@'localhost';
-GRANT SELECT, UPDATE ON book_store.cust_order TO 'cs_user'@'localhost';
-GRANT SELECT ON book_store.order_line TO 'cs_user'@'localhost';
-GRANT SELECT ON book_store.order_status TO 'cs_user'@'localhost';
+CREATE USER 'daisy_dolphine'@'localhost' IDENTIFIED BY 'daisy@123';
+GRANT SELECT, UPDATE ON book_store.customer TO 'daisy_dolphine'@'localhost';
+GRANT SELECT, UPDATE ON book_store.cust_order TO 'daisy_dolphine'@'localhost';
+GRANT SELECT ON book_store.order_line TO 'daisy_dolphine'@'localhost';
+GRANT SELECT ON book_store.order_status TO 'daisy_dolphine'@'localhost';
 
 -- Flush privileges to apply changes
 FLUSH PRIVILEGES;
