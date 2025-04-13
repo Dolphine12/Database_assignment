@@ -35,3 +35,8 @@ CREATE TABLE country(
 country_id INT AUTO_INCREMENT PRIMARY KEY,
 country_name VARCHAR(100) NOT NULL
 );
+
+
+
+CREATE USER 'Daisy'@'localhost' IDENTIFIED BY 'Daisy233';
+GRANT ALL PRIVILEGES ON bookstore.* TO 'Daisy'@'localhost';
