@@ -1,5 +1,38 @@
-<<<<<<< HEAD
 create database book_store;
+
+CREATE TABLE book (
+    bookId INT PRIMARY KEY AUTO_INCREMENT, 
+    bookTitle VARCHAR(50), 
+    ISBN VARCHAR(50), 
+    genre VARCHAR(50), 
+    publicationYear YEAR
+);
+
+CREATE TABLE author (
+    authorId INT PRIMARY KEY AUTO_INCREMENT, 
+    authorName VARCHAR(50), 
+    biography TEXT, 
+    nationality VARCHAR(50)
+);
+
+CREATE TABLE bookAuthor (
+    bookId INT, 
+    authorId INT, 
+    PRIMARY KEY (bookId, authorId), 
+    FOREIGN KEY (bookId) REFERENCES book(bookId) ON DELETE CASCADE, 
+    FOREIGN KEY (authorId) REFERENCES author(authorId) ON DELETE CASCADE
+);
+
+CREATE TABLE bookLanguage (
+    bookLanguageId INT PRIMARY KEY AUTO_INCREMENT, 
+    languageName VARCHAR(50)
+);
+
+CREATE TABLE publisher (
+    publisherId INT PRIMARY KEY AUTO_INCREMENT, 
+    name VARCHAR(50), 
+    contactDetail VARCHAR(50)
+);
 -- Create shipping_method table
 CREATE TABLE shipping_method (
     shipping_method_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +65,7 @@ CREATE TABLE order_line (
     order_line_id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT NOT NULL,
     book_id INT NOT NULL,
-    quantity INT NOT NULL,
+    quantity INT NOT NULL,.
     price DECIMAL(6,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
     FOREIGN KEY (book_id) REFERENCES book(book_id)
@@ -73,38 +106,3 @@ GRANT SELECT ON book_store.order_status TO 'cs_user'@'localhost';
 
 -- Flush privileges to apply changes
 FLUSH PRIVILEGES;
-=======
-CREATE TABLE book (
-    bookId INT PRIMARY KEY AUTO_INCREMENT, 
-    bookTitle VARCHAR(50), 
-    ISBN VARCHAR(50), 
-    genre VARCHAR(50), 
-    publicationYear YEAR
-);
-
-CREATE TABLE author (
-    authorId INT PRIMARY KEY AUTO_INCREMENT, 
-    authorName VARCHAR(50), 
-    biography TEXT, 
-    nationality VARCHAR(50)
-);
-
-CREATE TABLE bookAuthor (
-    bookId INT, 
-    authorId INT, 
-    PRIMARY KEY (bookId, authorId), 
-    FOREIGN KEY (bookId) REFERENCES book(bookId) ON DELETE CASCADE, 
-    FOREIGN KEY (authorId) REFERENCES author(authorId) ON DELETE CASCADE
-);
-
-CREATE TABLE bookLanguage (
-    bookLanguageId INT PRIMARY KEY AUTO_INCREMENT, 
-    languageName VARCHAR(50)
-);
-
-CREATE TABLE publisher (
-    publisherId INT PRIMARY KEY AUTO_INCREMENT, 
-    name VARCHAR(50), 
-    contactDetail VARCHAR(50)
-);
->>>>>>> b75df7dbf8fdd4ea007c5616b7491f5762b09293
