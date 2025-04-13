@@ -38,6 +38,43 @@ CREATE TABLE shipping_method (
     method_name VARCHAR(100) NOT NULL,
     cost DECIMAL(6,2) NOT NULL
 );
+-- creates table called customer
+CREATE TABLE customer(
+customer_id INT AUTO_INCREMENT PRIMARY KEY,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+email VARCHAR(15) UNIQUE,
+phone VARCHAR(15)
+);
+-- creates table called customer_addres
+CREATE TABLE customer_addres(
+customer_id INT,
+address_id INT,
+address_status_id INT,
+PRIMARY KEY(address_id),
+FOREIGN key(customer_id) REFERENCES customer(customer_id),
+FOREIGN key(address_id) REFERENCES address(address_id),
+FOREIGN key(address_status_id) REFERENCES address_status(address_status_id)
+);
+-- creates table called address_status
+CREATE TABLE address_status(
+adress_status_id INT AUTO_INCREMENT PRIMARY KEY,
+status_name VARCHAR(50) NOT NULL
+);
+-- creates table called address
+CREATE TABLE address(
+address_id INT AUTO_INCREMENT PRIMARY KEY,
+city VARCHAR(100) NOT NULL,
+state VARCHAR(100) NOT NULL,
+country_id INT,
+postal_code VARCHAR(20),
+FOREIGN KEY(country_id) REFERENCES country(country_id)
+);
+-- creates table called country
+CREATE TABLE country(
+country_id INT AUTO_INCREMENT PRIMARY KEY,
+country_name VARCHAR(100) NOT NULL
+);
 
 -- Create order_status table 
 CREATE TABLE order_status (
